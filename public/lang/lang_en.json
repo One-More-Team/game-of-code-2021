@@ -1,9 +1,11 @@
 {
+  "sign-in-title": "👋 Hello, please log in",
+  "sign-up-title": "😎 Sign up and improve your meetings",
   "sign-in": "Login",
   "sign-out": "Logout",
   "sign-up": "Sign up",
   "email": "Your email address",
-  "your-nickname": "Your Nickname",
+  "your-nickname": "Your name",
   "password": "Your password",
   "password-confirmation": "Password confirmation",
   "or": "or",

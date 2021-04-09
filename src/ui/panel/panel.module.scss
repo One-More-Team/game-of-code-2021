@@ -1,0 +1,18 @@
+.Wrapper {
+  position: relative;
+  font-size: 1em;
+  color: var(--color-0);
+  background: var(--color-0);
+  padding: 2em;
+  border-radius: 25px;
+  filter: drop-shadow(0px 0px 100px var(--medium-transparent-cover));
+  border: 10px solid var(--color-4);
+
+  .Label {
+    font-weight: bold;
+    font-size: 2em;
+    user-select: none;
+    color: var(--color-6);
+    margin-bottom: 1em;
+  }
+}

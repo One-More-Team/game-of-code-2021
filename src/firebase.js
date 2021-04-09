@@ -9,6 +9,8 @@ import ReduxSagaFirebase from "redux-saga-firebase";
 const firebaseConfig = {
   apiKey: "AIzaSyCUV6ULP0MBTKbOk7MJ6rYDMcSNmkMoat0",
   authDomain: "game-of-code-2021.firebaseapp.com",
+  databaseURL:
+    "https://game-of-code-2021-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "game-of-code-2021",
   storageBucket: "game-of-code-2021.appspot.com",
   messagingSenderId: "148524092971",

@@ -24,14 +24,14 @@
 }
 
 .PrimaryButton {
+  @extend .BaseButton;
+
   padding: 10px 15px;
   outline: none;
   border: none;
   border-radius: 5px;
   font-size: 1em;
-  color: var(--color-7);
   background-color: var(--color-3);
-  font-weight: normal;
   cursor: pointer;
   text-align: center;
   display: flex;
@@ -45,7 +45,7 @@
   user-select: none;
 
   &:hover {
-    filter: contrast(2);
+    filter: contrast(1.5);
   }
 }
 
@@ -62,7 +62,8 @@
 .Disabled {
   user-select: none;
   pointer-events: none;
-  opacity: 0.3;
+  opacity: 0.5;
+  color: var(--color-11);
 }
 
 .Selected {
@@ -72,15 +73,17 @@
 
 .SecondaryButton {
   @extend .PrimaryButton;
-  background-color: var(--color-5);
+
+  background-color: var(--color-2);
 
   &:hover {
-    filter: contrast(2);
+    filter: contrast(1.2);
   }
 }
 
 .TertiaryButton {
   @extend .PrimaryButton;
+
   background-color: var(--color-0);
 
   &:hover {

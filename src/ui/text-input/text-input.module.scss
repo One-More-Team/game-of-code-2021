@@ -1,0 +1,64 @@
+.Wrapper {
+  position: relative;
+  filter: var(--slight-shadow);
+  color: var(--color-1);
+  background-color: var(--strongly-transparent-cover);
+  border-radius: 5px;
+
+  i {
+    position: absolute;
+    left: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.5em;
+    color: var(--color-5);
+    font-size: 1.3em;
+  }
+
+  input {
+    color: var(--color-0);
+    width: calc(100% - 60px);
+    outline: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-family: "Karla", sans-serif;
+    padding: 10px 15px 11px;
+    background: none;
+    border: none;
+    color: var(--color-1);
+
+    &:focus,
+    &:active {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--color-5);
+    }
+  }
+
+  .WithIcon {
+    padding-left: 2.5em;
+  }
+
+  .Error {
+    padding-right: 1.5em;
+  }
+
+  .ErrorIcon {
+    left: initial;
+    right: 1em;
+    opacity: 1;
+    width: auto;
+    color: var(--color-3);
+  }
+}
+
+.Empty {
+  img {
+    opacity: 0.2;
+  }
+
+  input {
+  }
+}

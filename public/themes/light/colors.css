@@ -1,0 +1,18 @@
+:root {
+  --color-0: #ffffff;
+  --color-1: #757575;
+  --color-2: #abc62c;
+  --color-3: #fb585d;
+  --color-4: #f4f4f4;
+  --color-5: #bbbbbb;
+  --color-6: #e33cc7;
+  --color-7: #2ddfff;
+  --color-8: #f5f474;
+  --color-9: #ffaa47;
+  --color-10: #f54d28;
+  --color-11: #222222;
+
+  --strongly-transparent-cover: #00000011;
+  --medium-transparent-cover: #00000099;
+  --slightly-transparent-cover: #000000cc;
+}
