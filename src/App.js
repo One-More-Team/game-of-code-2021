@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { IntlProvider } from "react-intl";
 import { Redirect, Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
@@ -11,13 +11,21 @@ import {
 import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
 import { GetUser } from "./store/selectors/auth-selectors";
+import Button, { ButtonStyle } from "./ui/button/button";
 
 import "./App.css";
+import { initTestConnection } from "./store/actions/action-test";
 
 const App = () => {
+  const dispatch = useDispatch();
   const user = useSelector(GetUser);
   const siteLanguageId = useSelector(GetSiteLanguageId);
   const siteLanguageMessages = useSelector(GetSiteLanguageMessages);
+
+  const testConnection = () => {
+    console.log("Test Start");
+    dispatch(initTestConnection());
+  };
 
   const redirectToHome = () => (
     <Redirect
@@ -52,6 +60,12 @@ const App = () => {
                 <Route path="/sign-in" render={redirectToHome} />
                 <Route path="/sign-up" render={redirectToHome} />
               </Switch>
+
+              <Button
+                style={ButtonStyle.Primary}
+                messageId={"test"}
+                onClick={testConnection}
+              />
             </>
           ) : (
             <>
