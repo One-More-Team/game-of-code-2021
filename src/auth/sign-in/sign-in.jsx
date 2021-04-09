@@ -63,7 +63,13 @@ const SignIn = () => {
         type: InputErrorType.CUSTOM,
         message: signInError?.code.replace("auth/", ""),
       });
-  }, [signInError]);
+  }, [
+    signInError,
+    emailValidationResult.isValidated,
+    hasEmailError,
+    hasPasswordError,
+    passwordValidationResult.isValidated,
+  ]);
 
   return (
     <Panel className={styles.Wrapper} label="sign-in-title">

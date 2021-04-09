@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useIntl } from "react-intl";
 
 import InputError, { InputErrorType } from "../input-error/input-error";
@@ -28,7 +28,7 @@ const TextInput = ({
   const input = useRef();
   const formattedPlaceholder = useIntl().formatMessage({ id: placeholder });
 
-  const validate = () => {
+  const validate = useCallback(() => {
     const customValidationResult = customValidation && customValidation(value);
 
     if (customValidationResult && !customValidationResult.isValid) {
@@ -55,7 +55,7 @@ const TextInput = ({
     }
 
     return { isValidated: true, isValid: true };
-  };
+  }, [customValidation, minLength, value]);
 
   const onBlurHandler = (e) => {
     if (onBlur) onBlur(e);
@@ -98,9 +98,12 @@ const TextInput = ({
 
   useEffect(() => {
     const preValidationResult = validate();
-    if (validationResult.isValid || preValidationResult.isValid)
+    if (
+      validationResult.isValid !== preValidationResult.isValid &&
+      (validationResult.isValid || preValidationResult.isValid)
+    )
       setValidationResult(preValidationResult);
-  }, [value]);
+  }, [value, setValidationResult, validationResult, validate]);
 
   return (
     <>

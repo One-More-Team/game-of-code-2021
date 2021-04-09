@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FormattedMessage } from "react-intl";
 
 import Button, { ButtonStyle } from "../../ui/button/button";
 import {
@@ -70,7 +69,7 @@ const SignUp = () => {
         type: InputErrorType.CUSTOM,
         message: signUpError?.code.replace("auth/", ""),
       });
-  }, [signUpError]);
+  }, [signUpError, emailValidationResult.isValidated, hasEmailError]);
 
   return (
     <Panel className={styles.Wrapper} label="sign-up-title">
