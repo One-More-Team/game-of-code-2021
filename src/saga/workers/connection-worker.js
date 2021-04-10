@@ -15,13 +15,12 @@ import { info } from "../../utils/logger";
 
 const wsUri = "wss://192.168.2.109:8081/";
 //const wsUri = "wss://snowball-fight.herokuapp.com";
-let p;
 
 let websocket;
 
-function closeWebSocket() {
+/* function closeWebSocket() {
   websocket.close();
-}
+}*/
 
 export function doSend(msgObj) {
   websocket.send(JSON.stringify(msgObj));
@@ -162,7 +161,6 @@ export function* handleNewParticipant({ payload: userId }) {
   info("New Peer: creating " + userId);
 
   const stream = yield getLocalStream();
-  const user = yield select(GetUser);
 
   const p = new SimplePeer({
     initiator: true,
