@@ -12,6 +12,7 @@ import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
 import { GetUser } from "./store/selectors/auth-selectors";
 import AppPreloader from "./components/app-preloader/app-preloader";
+import DeviceChooser from "./components/device-chooser/device-chooser";
 import Home from "./components/home/home";
 
 import "./App.css";
@@ -56,6 +57,7 @@ const App = () => {
                 <Route path="/home" component={Home} />
                 <Route path="/sign-in" render={redirectToHome} />
                 <Route path="/sign-up" render={redirectToHome} />
+                <Route path="/device-chooser" render={DeviceChooser} />
               </Switch>
             </>
           ) : (

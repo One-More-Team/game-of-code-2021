@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-
+// import { useDispatch } from "react-redux";
 import Button, { ButtonStyle } from "../../../ui/button/button";
 import Panel from "../../../ui/panel/panel";
 import TextInput from "../../../ui/text-input/text-input";
@@ -8,14 +7,14 @@ import TextInput from "../../../ui/text-input/text-input";
 import styles from "./join-or-create-room.module.scss";
 
 const JoinOrCreateRoom = ({ className }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [roomId, setRoomId] = useState("");
   const [roomIdValidationResult, setRoomIdValidationResult] = useState({
     isValid: false,
   });
 
-  const joinRoomRequest = () => dispatch("");
-  const creatRoomRequest = () => dispatch("");
+  // const joinRoomRequest = () => dispatch("");
+  // const creatRoomRequest = () => dispatch("");
 
   return (
     <Panel className={`${styles.Wrapper} ${className}`}>
@@ -37,13 +36,13 @@ const JoinOrCreateRoom = ({ className }) => {
         <Button
           messageId="join"
           icon="fa-door-open"
-          onClick={joinRoomRequest}
+          navigationTarget="/device-chooser"
           style={ButtonStyle.Primary}
         />
         <Button
           messageId="create"
           icon="fa-plus-circle"
-          onClick={creatRoomRequest}
+          navigationTarget="/device-chooser"
           style={ButtonStyle.Secondary}
         />
       </div>
