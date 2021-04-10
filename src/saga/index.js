@@ -5,6 +5,7 @@ import AuthSaga from "./auth-saga";
 import SiteLanguage from "./site-language";
 import AppSaga from "./app-saga";
 import ConnectionSaga from "./connection-saga";
+import DeviceSaga from "./device-saga";
 import RoomSaga from "./room-saga";
 
 function* initialCall() {
@@ -18,6 +19,7 @@ function* Index() {
     ...AppSaga,
     ...ConnectionSaga,
     ...RoomSaga,
+    ...DeviceSaga,
   ]);
   yield call(initialCall);
 }
