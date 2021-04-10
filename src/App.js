@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import {
   GetSiteLanguageId,
   GetSiteLanguageMessages,
+  GetStream,
 } from "./store/selectors/app-selector";
 import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
@@ -15,12 +16,14 @@ import Button, { ButtonStyle } from "./ui/button/button";
 
 import "./App.css";
 import { initTestConnection } from "./store/actions/action-test";
+import MyStream from "./ui/my-stream/my-stream";
 
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector(GetUser);
   const siteLanguageId = useSelector(GetSiteLanguageId);
   const siteLanguageMessages = useSelector(GetSiteLanguageMessages);
+  const stream = useSelector(GetStream);
 
   const testConnection = () => {
     console.log("Test Start");
@@ -66,6 +69,7 @@ const App = () => {
                 messageId={"test"}
                 onClick={testConnection}
               />
+              <MyStream />
             </>
           ) : (
             <>
