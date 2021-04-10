@@ -3,6 +3,7 @@ import React from "react";
 import { DialogId } from "./dialog";
 import LeaveRoom from "./types/leave-room/leave-room";
 import Profile from "./types/profile/profile";
+import StartStream from "./types/start-stream/start-stream";
 
 export const getDialog = ({ dialogId, close }) => {
   switch (dialogId) {
@@ -18,6 +19,13 @@ export const getDialog = ({ dialogId, close }) => {
         isCloseable: true,
         label: "leave-room-title",
         component: <LeaveRoom close={close} />,
+      };
+
+    case DialogId.START_STREAM:
+      return {
+        isCloseable: true,
+        label: "start-stream-title",
+        component: <StartStream close={close} />,
       };
 
     default:
