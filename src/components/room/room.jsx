@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { initTestConnection } from "../../store/actions/action-test";
 import { openDialog } from "../../store/actions/dialog-action";
 
 import { connectToRoom } from "../../store/actions/room-action";
@@ -19,11 +18,6 @@ const Room = () => {
   const users = useSelector(GetUsers);
 
   const { roomId } = useParams();
-
-  const testConnection = () => {
-    console.log("Test Start");
-    dispatch(initTestConnection());
-  };
 
   const leaveRoomRequest = () => dispatch(openDialog(DialogId.LEAVE_ROOM));
 
@@ -45,16 +39,8 @@ const Room = () => {
       </div>
       <ThemeSelector className={styles.ThemeSelector} />
       <div className={styles.Users}>
-        {users.map((user) => (
-          <RoomUser key={user.uid} user={user} />
-        ))}
+        {users && users.map((user) => <RoomUser key={user.uid} user={user} />)}
       </div>
-      <Button
-        className={styles.Button}
-        style={ButtonStyle.Primary}
-        messageId={"test"}
-        onClick={testConnection}
-      />
       <MoodSetting className={styles.MoodSetting} />
     </div>
   );
