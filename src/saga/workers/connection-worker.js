@@ -144,7 +144,7 @@ export function* handleAnswerForNewParticipant({ payload }) {
   });
 
   const streamChannel = new eventChannel((emit) => {
-    p.on("stream", (stream) => {
+    answerPeer.on("stream", (stream) => {
       emit(streamReceived({ uid: userId, stream }));
     });
 
