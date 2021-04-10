@@ -16,7 +16,7 @@ export const AppPreloader = () => {
         <div className={styles.LoaderWrapper}>
           <LoaderAnimation />
         </div>
-        <WelcomeMessage />
+        {isSiteinited && <WelcomeMessage />}
       </div>
     </div>
   );

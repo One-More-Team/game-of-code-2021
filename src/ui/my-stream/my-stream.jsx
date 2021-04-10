@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { GetStream } from "../../store/selectors/app-selector";
 import styles from "./my-stream.module.scss";
 

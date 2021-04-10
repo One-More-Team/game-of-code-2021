@@ -12,6 +12,7 @@ import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
 import { GetUser } from "./store/selectors/auth-selectors";
 import Button, { ButtonStyle } from "./ui/button/button";
+import AppPreloader from "./components/app-preloader/app-preloader";
 
 import "./App.css";
 import { initTestConnection } from "./store/actions/action-test";
@@ -53,6 +54,7 @@ const App = () => {
       <BrowserRouter basename="/">
         <div className="App">
           <div className="base-background" />
+          <AppPreloader />
           {user ? (
             <>
               <Switch>
