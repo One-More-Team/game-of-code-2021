@@ -7,11 +7,14 @@ import {
   initRoom,
   userAddedToRoom,
   userRemovedFromRoom,
+  roomUserDataChanged,
 } from "../../store/actions/room-action";
 import { GetUser } from "../../store/selectors/auth-selectors";
+import { GetRoomId } from "../../store/selectors/room-selectors";
 import { GetUserMood } from "../../store/selectors/user-data-selector";
 
 export function* connectToRoomHandler({ payload: roomId }) {
+  const now = Date.now();
   const roomRef = firebase.database().ref(`${ROOMS}/${roomId}`);
   const participantsRef = firebase
     .database()
@@ -22,7 +25,7 @@ export function* connectToRoomHandler({ payload: roomId }) {
   });
   const { displayName, uid } = yield select(GetUser);
   const mood = yield select(GetUserMood);
-  const user = { displayName, mood, uid };
+  const user = { displayName, mood, uid, entryDate: now };
 
   const ownRef = firebase
     .database()
@@ -49,6 +52,9 @@ export function* connectToRoomHandler({ payload: roomId }) {
     participantsRef.on("child_removed", (snap) =>
       emit(userRemovedFromRoom(snap.val()))
     );
+    participantsRef.on("child_changed", (snap) =>
+      emit(roomUserDataChanged(snap.val()))
+    );
     return () => {
       participantsRef.on("child_added", null);
       participantsRef.on("child_removed", null);
@@ -58,5 +64,17 @@ export function* connectToRoomHandler({ payload: roomId }) {
   while (true) {
     const action = yield take(participantsChannel);
     yield put(action);
+  }
+}
+
+export function* setMoodHandler({ payload: mood }) {
+  const { uid } = yield select(GetUser);
+  const roomId = yield select(GetRoomId);
+
+  if (roomId) {
+    const moodRef = firebase
+      .database()
+      .ref(`${ROOMS}/${roomId}/participants/${uid}/mood`);
+    yield moodRef.set(mood);
   }
 }

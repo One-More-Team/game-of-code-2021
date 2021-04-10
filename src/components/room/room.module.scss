@@ -1,2 +1,48 @@
-.User {
+.Wrapper {
+  display: grid;
+  grid-template-areas:
+    "label theme"
+    "content content"
+    "users users"
+    "mood mood";
+  grid-gap: 1em;
+  grid-template-rows: auto 1fr auto auto;
+  padding: 1em;
+  position: relative;
+  height: 100%;
+  grid-template-columns: 1fr auto;
+
+  .Label {
+    background: var(--color-3);
+    color: var(--color-0);
+    padding: 1em;
+    grid-area: label;
+    font-weight: bold;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    filter: var(--slightly-shadow);
+
+    i {
+      display: block;
+      margin-right: 0.5em;
+    }
+  }
+
+  .ThemeSelector {
+    grid-area: theme;
+  }
+
+  .Users {
+    display: flex;
+    flex-wrap: wrap;
+    grid-area: users;
+    position: relative;
+  }
+
+  .MoodSetting {
+    grid-area: mood;
+    font-size: 0.8em;
+    width: 100%;
+  }
 }

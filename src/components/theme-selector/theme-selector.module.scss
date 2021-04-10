@@ -10,6 +10,7 @@
     border-radius: 50px;
     user-select: none;
     cursor: pointer;
+    filter: var(--slightly-shadow);
 
     &:first-child {
       margin-right: 0.5em;

@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Themes } from "../../../../enum/themes";
-import { setTheme } from "../../../../store/actions/app-action";
-import { GetActiveTheme } from "../../../../store/selectors/app-selector";
+import { Themes } from "../../enum/themes";
+import { setTheme } from "../../store/actions/app-action";
+import { GetActiveTheme } from "../../store/selectors/app-selector";
 
 import styles from "./theme-selector.module.scss";
 
-const ThemeSelector = () => {
+const ThemeSelector = ({ className }) => {
   const dispatch = useDispatch();
   const activeTheme = useSelector(GetActiveTheme);
 
@@ -15,7 +15,7 @@ const ThemeSelector = () => {
   const setThemeToLight = () => dispatch(setTheme(Themes.LIGHT));
 
   return (
-    <div className={styles.Wrapper}>
+    <div className={`${styles.Wrapper} ${className}`}>
       <i
         className={`fas fa-sun ${styles.Icon} ${
           activeTheme === Themes.LIGHT && styles.Selected

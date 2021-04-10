@@ -4,7 +4,9 @@ import { useParams } from "react-router";
 
 import { connectToRoom } from "../../store/actions/room-action";
 import { GetUsers } from "../../store/selectors/room-selectors";
-import Info from "../../ui/info/info";
+import MoodSetting from "../mood-setting/mood-setting";
+import ThemeSelector from "../theme-selector/theme-selector";
+import RoomUser from "./room-user/room-user";
 
 import styles from "./room.module.scss";
 
@@ -19,16 +21,18 @@ const Room = () => {
   }, [dispatch, roomId]);
 
   return (
-    <div>
-      <div>
+    <div className={styles.Wrapper}>
+      <div className={styles.Label}>
+        <i className={"fas fa-calendar"} />
         {roomId}
-        {users.map(({ displayName, uid }) => (
-          <Info className={styles.User} key={uid}>
-            {displayName}
-          </Info>
+      </div>
+      <ThemeSelector className={styles.ThemeSelector} />
+      <div className={styles.Users}>
+        {users.map((user) => (
+          <RoomUser key={user.uid} user={user} />
         ))}
       </div>
-      <div></div>
+      <MoodSetting className={styles.MoodSetting} />
     </div>
   );
 };

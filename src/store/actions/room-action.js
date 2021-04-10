@@ -15,3 +15,7 @@ export const userAddedToRoom = createAction({
 export const userRemovedFromRoom = createAction({
   type: "USER_REMOVED_FROM_ROOM",
 });
+
+export const roomUserDataChanged = createAction({
+  type: "ROOM_USER_DATA_CHANGED",
+});
