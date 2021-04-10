@@ -10,11 +10,12 @@ import {
   newParticipant,
 } from "../../store/actions/websocket-actions";
 import { GetUser } from "../../store/selectors/auth-selectors";
+import { GetRoomId } from "../../store/selectors/room-selectors";
 import { GetUserStream } from "../../store/selectors/stream-selector";
 import { info } from "../../utils/logger";
 
-const wsUri = "wss://192.168.2.109:8081/";
-//const wsUri = "wss://snowball-fight.herokuapp.com";
+//const wsUri = "wss://192.168.2.109:8081/";
+const wsUri = "wss://honest-meeting.herokuapp.com/";
 
 let websocket;
 
@@ -47,9 +48,10 @@ const onError = () => info("ERROR");
 
 function* createWebSocket() {
   const user = yield select(GetUser);
+  const roomId = yield select(GetRoomId);
   info("Display Name", user.uid);
 
-  websocket = new WebSocket(wsUri + "tibiszoba/" + user.uid);
+  websocket = new WebSocket(wsUri + roomId + "/" + user.uid);
   websocket.onclose = (evt) => onClose(evt);
   websocket.onerror = (evt) => onError(evt);
 
