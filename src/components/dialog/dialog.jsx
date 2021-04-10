@@ -10,6 +10,7 @@ import styles from "./dialog.module.scss";
 
 export const DialogId = {
   PROFILE: "PROFILE",
+  LEAVE_ROOM: "LEAVE_ROOM",
 };
 
 const Dialog = () => {

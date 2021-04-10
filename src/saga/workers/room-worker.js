@@ -78,3 +78,11 @@ export function* setMoodHandler({ payload: mood }) {
     yield moodRef.set(mood);
   }
 }
+
+export function* leaveRoomHandler() {
+  /* const { uid } = yield select(GetUser);
+  const roomId = yield select(GetRoomId);
+
+  const roomRef = firebase.database().ref(`${ROOMS}/${roomId}`); */
+  yield;
+}

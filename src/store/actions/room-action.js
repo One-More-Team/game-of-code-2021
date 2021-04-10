@@ -19,3 +19,7 @@ export const userRemovedFromRoom = createAction({
 export const roomUserDataChanged = createAction({
   type: "ROOM_USER_DATA_CHANGED",
 });
+
+export const leaveRoom = createAction({
+  type: "LEAVE_ROOM",
+});

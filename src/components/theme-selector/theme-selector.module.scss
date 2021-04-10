@@ -1,28 +1,6 @@
 .Wrapper {
-  display: flex;
-
-  .Icon {
-    padding: 1em 1.5em;
-    background-color: var(--medium-transparent-cover);
-    color: var(--color-12);
-    width: fit-content;
-    height: fit-content;
-    border-radius: 50px;
-    user-select: none;
-    cursor: pointer;
-    filter: var(--slightly-shadow);
-
-    &:first-child {
-      margin-right: 0.5em;
-    }
-
-    i {
-      pointer-events: none;
-    }
-  }
-
-  .Selected {
-    color: var(--color-8);
-    pointer-events: none;
-  }
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 0.5em;
+  filter: var(--slightly-shadow);
 }

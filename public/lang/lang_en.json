@@ -23,5 +23,8 @@
   "your-profile": "Your Profile",
   "current-mood": "What is you current mood?",
   "join": "Join",
-  "create": "Create"
+  "create": "Create",
+  "leave-room-title": "Leave room",
+  "leave-room-question": "🤔 Are you sure you want to leave this room?",
+  "leave-room": "Leave room"
 }

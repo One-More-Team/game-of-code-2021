@@ -16,7 +16,7 @@
     border-radius: 16px;
     color: var(--color-13);
     background: var(--color-0);
-    transform: translateY(100%);
+    transform: translateY(110%);
 
     .Mood {
       position: absolute;
@@ -44,7 +44,7 @@
 
 @keyframes ShowUser {
   0% {
-    transform: translateY(100%);
+    transform: translateY(110%);
   }
   100% {
     transform: translateY(0);

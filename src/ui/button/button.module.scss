@@ -49,28 +49,6 @@
   }
 }
 
-.IconMargin {
-  margin-right: 10px;
-}
-
-.Loading {
-  user-select: none;
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.Disabled {
-  user-select: none;
-  pointer-events: none;
-  opacity: 0.5;
-  color: var(--color-11);
-}
-
-.Selected {
-  color: var(--color-6);
-  background-color: var(--color-7);
-}
-
 .SecondaryButton {
   @extend .PrimaryButton;
 
@@ -89,4 +67,47 @@
   &:hover {
     filter: contrast(2);
   }
+}
+
+.QuaternaryButton {
+  @extend .BaseButton;
+
+  padding: 0 1em;
+  background-color: var(--medium-transparent-cover);
+  border-radius: 50px;
+  filter: var(--slightly-shadow);
+  font-size: 1.3em;
+  color: var(--color-12);
+
+  .Icon {
+    color: var(--color-12);
+    width: fit-content;
+    height: fit-content;
+
+    i {
+      pointer-events: none;
+    }
+  }
+}
+
+.Icon {
+  margin-right: 10px;
+}
+
+.Loading {
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.Disabled {
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.5;
+  color: var(--color-11);
+}
+
+.Selected {
+  color: var(--color-8);
+  pointer-events: none;
 }

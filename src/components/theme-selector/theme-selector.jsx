@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Themes } from "../../enum/themes";
 import { setTheme } from "../../store/actions/app-action";
 import { GetActiveTheme } from "../../store/selectors/app-selector";
+import Button, { ButtonStyle } from "../../ui/button/button";
 
 import styles from "./theme-selector.module.scss";
 
@@ -16,17 +17,17 @@ const ThemeSelector = ({ className }) => {
 
   return (
     <div className={`${styles.Wrapper} ${className}`}>
-      <i
-        className={`fas fa-sun ${styles.Icon} ${
-          activeTheme === Themes.LIGHT && styles.Selected
-        }`}
+      <Button
+        icon="fa-sun"
         onClick={setThemeToLight}
+        style={ButtonStyle.Quaternary}
+        selected={activeTheme === Themes.LIGHT}
       />
-      <i
-        className={`fas fa-moon ${styles.Icon} ${
-          activeTheme === Themes.DARK && styles.Selected
-        }`}
+      <Button
+        icon="fa-moon"
         onClick={setThemeToDark}
+        style={ButtonStyle.Quaternary}
+        selected={activeTheme === Themes.DARK}
       />
     </div>
   );

@@ -8,6 +8,7 @@ const ButtonStyle = {
   Primary: "Primary",
   Secondary: "Secondary",
   Tertiary: "Tertiary",
+  Quaternary: "Quaternary",
 };
 
 const Button = ({
@@ -46,6 +47,9 @@ const Button = ({
     case ButtonStyle.Tertiary:
       styleClassName = styles.TertiaryButton;
       break;
+    case ButtonStyle.Quaternary:
+      styleClassName = styles.QuaternaryButton;
+      break;
     default:
   }
 
@@ -62,7 +66,7 @@ const Button = ({
           <i
             className={`${iconPrefix} ${
               selectedIcon && selected ? selectedIcon : icon
-            } ${(messageId || label) && styles.IconMargin}`}
+            } ${(messageId || label) && styles.Icon}`}
           ></i>
         )}
         {messageId === null ? (
