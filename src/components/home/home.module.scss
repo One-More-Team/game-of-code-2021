@@ -1,32 +1,40 @@
 .Wrapper {
-  display: grid;
-  grid-template-areas:
-    "profile stream"
-    "room room"
-    "button button"
-    "mood mood";
-  grid-gap: 1em;
-  grid-template-rows: auto 1fr auto auto;
-  padding: 1em;
+  position: relative;
   height: 100%;
-}
 
-.Button {
-  grid-area: button;
-}
+  .MyStream {
+    position: fixed;
+    right: 1em;
+    top: 5em;
+  }
 
-.MyStream {
-  grid-area: stream;
-}
+  .Layout {
+    display: grid;
+    grid-template-areas:
+      "profile"
+      "room"
+      "button"
+      "mood";
+    grid-gap: 1em;
+    grid-template-rows: auto 1fr auto auto;
+    padding: 1em;
+    position: relative;
+    height: 100%;
 
-.MoodSetting {
-  width: 100%;
-  grid-area: mood;
-}
+    .Button {
+      grid-area: button;
+    }
 
-.JoinOrCreateRoom {
-  width: fit-content;
-  grid-area: room;
-  align-self: center;
-  justify-self: center;
+    .MoodSetting {
+      width: 100%;
+      grid-area: mood;
+    }
+
+    .JoinOrCreateRoom {
+      width: fit-content;
+      grid-area: room;
+      align-self: center;
+      justify-self: center;
+    }
+  }
 }

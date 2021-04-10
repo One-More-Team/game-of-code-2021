@@ -1,13 +1,19 @@
 .Wrapper {
   grid-area: profile;
-  cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
-  .Mood {
-    font-size: 1.5em;
-    line-height: 0;
-    margin-right: 0.2em;
-    margin-left: -0.2em;
+  .Profile {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    .Mood {
+      font-size: 1.5em;
+      line-height: 0;
+      margin-right: 0.2em;
+      margin-left: -0.2em;
+    }
   }
 }

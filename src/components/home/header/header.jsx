@@ -9,6 +9,7 @@ import { DialogId } from "../../dialog/dialog";
 import { moods } from "../mood-setting/mood-setting";
 
 import styles from "./header.module.scss";
+import ThemeSelector from "./theme-selector/theme-selector";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,9 +18,12 @@ const Header = () => {
   const openProfileDialog = () => dispatch(openDialog(DialogId.PROFILE));
 
   return (
-    <Info className={styles.Wrapper} onClick={openProfileDialog}>
-      <span className={styles.Mood}>{moods[currentMood]}</span> {displayName}
-    </Info>
+    <div className={styles.Wrapper}>
+      <Info className={styles.Profile} onClick={openProfileDialog}>
+        <span className={styles.Mood}>{moods[currentMood]}</span> {displayName}
+      </Info>
+      <ThemeSelector />
+    </div>
   );
 };
 

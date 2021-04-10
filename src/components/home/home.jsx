@@ -18,16 +18,18 @@ const Home = () => {
   };
   return (
     <div className={styles.Wrapper}>
-      <Header />
-      <Button
-        className={styles.Button}
-        style={ButtonStyle.Primary}
-        messageId={"test"}
-        onClick={testConnection}
-      />
+      <div className={styles.Layout}>
+        <Header />
+        <Button
+          className={styles.Button}
+          style={ButtonStyle.Primary}
+          messageId={"test"}
+          onClick={testConnection}
+        />
+        <JoinOrCreateRoom className={styles.JoinOrCreateRoom} />
+        <MoodSetting className={styles.MoodSetting} />
+      </div>
       <MyStream className={styles.MyStream} />
-      <JoinOrCreateRoom className={styles.JoinOrCreateRoom} />
-      <MoodSetting className={styles.MoodSetting} />
     </div>
   );
 };
