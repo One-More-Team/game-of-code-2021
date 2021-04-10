@@ -13,6 +13,8 @@
   background-attachment: fixed;
   background-size: cover;
   z-index: 99;
+  padding: 0 2em;
+  box-sizing: border-box;
 
   .Content {
     position: relative;
@@ -28,6 +30,11 @@
 }
 
 .Loaded {
+  animation: SmoothFadeOut 2s 1s forwards;
+  pointer-events: none;
+}
+
+.LoadedAndLogged {
   animation: FadeOut 2s 1s forwards;
   pointer-events: none;
 

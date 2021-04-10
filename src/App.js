@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { IntlProvider } from "react-intl";
 import { Redirect, Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
@@ -11,23 +11,16 @@ import {
 import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
 import { GetUser } from "./store/selectors/auth-selectors";
-import Button, { ButtonStyle } from "./ui/button/button";
 import AppPreloader from "./components/app-preloader/app-preloader";
+import Home from "./components/home/home";
 
 import "./App.css";
-import { initTestConnection } from "./store/actions/action-test";
-import MyStream from "./ui/my-stream/my-stream";
+import Dialog from "./components/dialog/dialog";
 
 const App = () => {
-  const dispatch = useDispatch();
   const user = useSelector(GetUser);
   const siteLanguageId = useSelector(GetSiteLanguageId);
   const siteLanguageMessages = useSelector(GetSiteLanguageMessages);
-
-  const testConnection = () => {
-    console.log("Test Start");
-    dispatch(initTestConnection());
-  };
 
   const redirectToHome = () => (
     <Redirect
@@ -55,21 +48,15 @@ const App = () => {
         <div className="App">
           <div className="base-background" />
           <AppPreloader />
+          <Dialog />
           {user ? (
             <>
               <Switch>
                 <Route exact path="/" component={redirectToHome} />
-                <Route path="/home" render={() => "home..."} />
+                <Route path="/home" component={Home} />
                 <Route path="/sign-in" render={redirectToHome} />
                 <Route path="/sign-up" render={redirectToHome} />
               </Switch>
-
-              <Button
-                style={ButtonStyle.Primary}
-                messageId={"test"}
-                onClick={testConnection}
-              />
-              <MyStream />
             </>
           ) : (
             <>

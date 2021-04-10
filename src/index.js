@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import IndexSaga from "./saga/index";
 import authReducer from "./store/reducers/auth-reducer";
 import appReducer from "./store/reducers/app-reducer";
+import dialogReducer from "./store/reducers/dialog-reducer";
 
 import App from "./App";
 
@@ -22,6 +23,7 @@ const sagaMiddleware = createSagaMiddleware();
 const rootReducer = combineReducers({
   authReducer,
   appReducer,
+  dialogReducer,
 });
 
 const store = createStore(

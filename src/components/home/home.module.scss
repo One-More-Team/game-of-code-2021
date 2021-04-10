@@ -1,0 +1,16 @@
+.Wrapper {
+  display: grid;
+  grid-template-areas:
+    "profile stream"
+    "button stream";
+  grid-gap: 1em;
+  padding: 1em;
+}
+
+.Button {
+  grid-area: button;
+}
+
+.MyStream {
+  grid-area: stream;
+}

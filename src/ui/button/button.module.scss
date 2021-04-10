@@ -31,7 +31,7 @@
   border: none;
   border-radius: 5px;
   font-size: 1em;
-  background-color: var(--color-3);
+  background-color: var(--color-2);
   cursor: pointer;
   text-align: center;
   display: flex;
@@ -45,7 +45,7 @@
   user-select: none;
 
   &:hover {
-    filter: contrast(1.5);
+    filter: contrast(1.2);
   }
 }
 
@@ -74,10 +74,10 @@
 .SecondaryButton {
   @extend .PrimaryButton;
 
-  background-color: var(--color-2);
+  background-color: var(--color-3);
 
   &:hover {
-    filter: contrast(1.2);
+    filter: contrast(1.5);
   }
 }
 
