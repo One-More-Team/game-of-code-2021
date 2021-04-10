@@ -10,6 +10,7 @@ import appReducer from "./store/reducers/app-reducer";
 import devicesReducer from "./store/reducers/devices";
 import dialogReducer from "./store/reducers/dialog-reducer";
 import userDataReducer from "./store/reducers/user-data-reducer";
+import roomReducer from "./store/reducers/room-reducer";
 
 import App from "./App";
 
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   dialogReducer,
   userDataReducer,
   devicesReducer,
+  roomReducer,
 });
 
 const store = createStore(

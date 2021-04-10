@@ -5,6 +5,7 @@ import { Redirect, Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 
 import {
+  GetIsSiteinited,
   GetSiteLanguageId,
   GetSiteLanguageMessages,
 } from "./store/selectors/app-selector";
@@ -14,12 +15,14 @@ import { GetUser } from "./store/selectors/auth-selectors";
 import AppPreloader from "./components/app-preloader/app-preloader";
 import DeviceSetup from "./components/device-chooser/device-setup";
 import Home from "./components/home/home";
+import Dialog from "./components/dialog/dialog";
+import Room from "./components/room/room";
 
 import "./App.css";
-import Dialog from "./components/dialog/dialog";
 
 const App = () => {
   const user = useSelector(GetUser);
+  const isSiteinited = useSelector(GetIsSiteinited);
   const siteLanguageId = useSelector(GetSiteLanguageId);
   const siteLanguageMessages = useSelector(GetSiteLanguageMessages);
 
@@ -49,25 +52,31 @@ const App = () => {
         <div className="App">
           <div className="base-background" />
           <AppPreloader />
-          <Dialog />
-          {user ? (
+          {isSiteinited && (
             <>
-              <Switch>
-                <Route exact path="/" component={redirectToHome} />
-                <Route path="/home" component={Home} />
-                <Route path="/sign-in" render={redirectToHome} />
-                <Route path="/sign-up" render={redirectToHome} />
-                <Route path="/device-chooser" render={DeviceSetup} />
-              </Switch>
-            </>
-          ) : (
-            <>
-              <Switch>
-                <Route exact path="/" component={redirectToLogin} />
-                <Route path="/home" component={redirectToLogin} />
-                <Route path="/sign-in" component={SignIn} />
-                <Route path="/sign-up" component={SignUp} />
-              </Switch>
+              <Dialog />
+              {user ? (
+                <>
+                  <Switch>
+                    <Route exact path="/" component={redirectToHome} />
+                    <Route path="/home" component={Home} />
+                    <Route path="/sign-in" render={redirectToHome} />
+                    <Route path="/sign-up" render={redirectToHome} />
+                    <Route path="/device-chooser" component={DeviceSetup} />
+                    <Route path="/room/:roomId" component={Room} />
+                  </Switch>
+                </>
+              ) : (
+                <>
+                  <Switch>
+                    <Route exact path="/" component={redirectToLogin} />
+                    <Route path="/room" component={redirectToLogin} />
+                    <Route path="/home" component={redirectToLogin} />
+                    <Route path="/sign-in" component={SignIn} />
+                    <Route path="/sign-up" component={SignUp} />
+                  </Switch>
+                </>
+              )}
             </>
           )}
         </div>
