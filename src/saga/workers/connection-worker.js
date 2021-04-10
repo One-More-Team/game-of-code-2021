@@ -142,6 +142,20 @@ export function* handleAnswerForNewParticipant({ payload }) {
       },
     });
   });
+
+  const streamChannel = new eventChannel((emit) => {
+    p.on("stream", (stream) => {
+      emit(streamReceived({ uid: userId, stream }));
+    });
+
+    return () => {};
+  });
+
+  while (true) {
+    const action = yield take(streamChannel);
+
+    yield put(action);
+  }
 }
 
 export function* handleNewParticipant({ payload: userId }) {
