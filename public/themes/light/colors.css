@@ -15,4 +15,6 @@
   --strongly-transparent-cover: #00000011;
   --medium-transparent-cover: #00000099;
   --slightly-transparent-cover: #000000cc;
+
+  --glow-shadow: drop-shadow(0px 0px 10px var(--color-0));
 }

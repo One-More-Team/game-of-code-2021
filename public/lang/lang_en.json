@@ -16,5 +16,6 @@
   "invalid-email": "The email address is badly formatted.",
   "user-not-found": "User could not be found with this email address.",
   "wrong-password": "You have entered an invalid email address or password.",
-  "too-many-requests": "Too many requests, try again later"
+  "too-many-requests": "Too many requests, try again later",
+  "welcome-message": "👋 Welcome {name}!"
 }

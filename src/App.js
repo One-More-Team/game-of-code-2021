@@ -5,6 +5,7 @@ import { Redirect, Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 
 import {
+  GetIsSiteinited,
   GetSiteLanguageId,
   GetSiteLanguageMessages,
 } from "./store/selectors/app-selector";
@@ -12,15 +13,17 @@ import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
 import { GetUser } from "./store/selectors/auth-selectors";
 import Button, { ButtonStyle } from "./ui/button/button";
+import { initTestConnection } from "./store/actions/action-test";
+import AppPreloader from "./components/app-preloader/app-preloader";
 
 import "./App.css";
-import { initTestConnection } from "./store/actions/action-test";
 
 const App = () => {
   const dispatch = useDispatch();
   const user = useSelector(GetUser);
   const siteLanguageId = useSelector(GetSiteLanguageId);
   const siteLanguageMessages = useSelector(GetSiteLanguageMessages);
+  const isSiteinited = useSelector(GetIsSiteinited);
 
   const testConnection = () => {
     console.log("Test Start");
@@ -50,34 +53,37 @@ const App = () => {
       onError={() => {}}
     >
       <BrowserRouter basename="/">
-        <div className="App">
-          <div className="base-background" />
-          {user ? (
-            <>
-              <Switch>
-                <Route exact path="/" component={redirectToHome} />
-                <Route path="/home" render={() => "home..."} />
-                <Route path="/sign-in" render={redirectToHome} />
-                <Route path="/sign-up" render={redirectToHome} />
-              </Switch>
+        <AppPreloader />
+        {isSiteinited && (
+          <div className="App">
+            <div className="base-background" />
+            {user ? (
+              <>
+                <Switch>
+                  <Route exact path="/" component={redirectToHome} />
+                  <Route path="/home" render={() => "home..."} />
+                  <Route path="/sign-in" render={redirectToHome} />
+                  <Route path="/sign-up" render={redirectToHome} />
+                </Switch>
 
-              <Button
-                style={ButtonStyle.Primary}
-                messageId={"test"}
-                onClick={testConnection}
-              />
-            </>
-          ) : (
-            <>
-              <Switch>
-                <Route exact path="/" component={redirectToLogin} />
-                <Route path="/home" component={redirectToLogin} />
-                <Route path="/sign-in" component={SignIn} />
-                <Route path="/sign-up" component={SignUp} />
-              </Switch>
-            </>
-          )}
-        </div>
+                <Button
+                  style={ButtonStyle.Primary}
+                  messageId={"test"}
+                  onClick={testConnection}
+                />
+              </>
+            ) : (
+              <>
+                <Switch>
+                  <Route exact path="/" component={redirectToLogin} />
+                  <Route path="/home" component={redirectToLogin} />
+                  <Route path="/sign-in" component={SignIn} />
+                  <Route path="/sign-up" component={SignUp} />
+                </Switch>
+              </>
+            )}
+          </div>
+        )}
       </BrowserRouter>
     </IntlProvider>
   );

@@ -1,0 +1,53 @@
+.Wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .AnimWrapper {
+    animation: AnimWrapper 2s 1s ease-out forwards;
+    overflow: hidden;
+    width: fit-content;
+    transform: translateX(-100%);
+
+    .Content {
+      transform: translateX(100%);
+      font-size: 3em;
+      font-weight: bold;
+      color: var(--color-0);
+      text-align: center;
+      animation: ContentAnim 2s 1s ease-out forwards;
+    }
+  }
+}
+
+@keyframes AnimWrapper {
+  0%,
+  5% {
+    transform: translateX(-100%);
+  }
+  25%,
+  80% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes ContentAnim {
+  0%,
+  5% {
+    transform: translateX(100%);
+  }
+  25%,
+  80% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
