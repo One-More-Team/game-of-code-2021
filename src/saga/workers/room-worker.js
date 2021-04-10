@@ -24,19 +24,23 @@ export function* connectToRoomHandler({ payload: roomId }) {
   const mood = yield select(GetUserMood);
   const user = { displayName, mood, uid };
 
+  const ownRef = firebase
+    .database()
+    .ref(`${ROOMS}/${roomId}/participants/${uid}`);
   if (!isRoomExist) {
     yield participantsRef.set({
       [uid]: user,
     });
   } else {
     if (!participantsRef[uid]) {
-      const ownRef = firebase
-        .database()
-        .ref(`${ROOMS}/${roomId}/participants/${uid}`);
       ownRef.set(user);
     }
     yield put(initRoom({ participants: { [uid]: user } }));
   }
+
+  ownRef.onDisconnect().remove((err) => {
+    if (err !== null) console.log(err);
+  });
 
   const participantsChannel = eventChannel((emit) => {
     participantsRef.on("child_added", (snap) =>

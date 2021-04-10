@@ -18,9 +18,9 @@ const userAddedToRoomHandler = ({ state, payload: user }) => ({
   users: [...state.users, user],
 });
 
-const userRemovedFromRoomHandler = ({ state, payload: user }) => ({
+const userRemovedFromRoomHandler = ({ state, payload: { uid } }) => ({
   ...state,
-  users: state.users.filter((entry) => entry !== user),
+  users: state.users.filter((entry) => entry.uid !== uid),
 });
 
 const configMap = {

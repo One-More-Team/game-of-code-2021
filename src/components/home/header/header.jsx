@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openDialog } from "../../../store/actions/dialog-action";
 
-import { GetProfile, GetUser } from "../../../store/selectors/auth-selectors";
+import { GetProfile } from "../../../store/selectors/auth-selectors";
 import { GetUserMood } from "../../../store/selectors/user-data-selector";
 import Info from "../../../ui/info/info";
 import { DialogId } from "../../dialog/dialog";
