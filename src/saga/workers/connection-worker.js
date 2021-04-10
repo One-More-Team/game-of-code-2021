@@ -7,14 +7,15 @@ import {
   streamReady,
 } from "../../store/actions/action-test";
 import {
+  answerForNewParticipant,
   connectedToWS,
-  CONNECTED_TO_WS,
+  newParticipant,
 } from "../../store/actions/websocket-actions";
 import { GetUser } from "../../store/selectors/auth-selectors";
 import { info } from "../../utils/logger";
 
-// const wsUri = "wss://192.168.2.109:8081";
-const wsUri = "wss://snowball-fight.herokuapp.com";
+const wsUri = "wss://192.168.2.109:8081/";
+//const wsUri = "wss://snowball-fight.herokuapp.com";
 let p;
 
 let websocket;
@@ -33,12 +34,10 @@ export function* initConnectionHandler() {
   info("Connecting to WSS");
 
   yield fork(createWebSocket);
-  yield take(CONNECTED_TO_WS);
+  yield take(connectedToWS().type);
 
-  const user = yield select(GetUser);
-  info("Display Name", user.uid);
   /* yield call(doSend, {
-    header: "start",
+    event: "start",
     data: { gameMode: gameMode.toLowerCase(), userName: user.displayName },
   });
   */
@@ -49,7 +48,10 @@ const onClose = () => info("DISCONNECTED");
 const onError = () => info("ERROR");
 
 function* createWebSocket() {
-  websocket = new WebSocket(wsUri);
+  const user = yield select(GetUser);
+  info("Display Name", user.uid);
+
+  websocket = new WebSocket(wsUri + "tibiszoba/" + user.uid);
   websocket.onclose = (evt) => onClose(evt);
   websocket.onerror = (evt) => onError(evt);
 
@@ -70,11 +72,22 @@ function subscribe(socket) {
 
     socket.onmessage = (evt) => {
       const rawData = JSON.parse(evt.data);
-      const command = rawData.header;
-
+      const command = rawData.event;
+      console.log("command " + command);
       switch (command) {
-        case WSSServerMessages.READY: {
-          // emit(storeCountDown(rawData.data));
+        case WSSServerMessages.NEWPARTICIPANT: {
+          info("New Member Arriwed " + rawData.data.userId);
+          emit(newParticipant(rawData.data.userId));
+          break;
+        }
+        case WSSServerMessages.OFFER: {
+          info("Offer arriwed");
+          emit(answerForNewParticipant(rawData.data));
+          break;
+        }
+        case WSSServerMessages.ANSWER: {
+          info("ANSWER arriwed");
+          //emit(answerForNewParticipant(rawData.data));
           break;
         }
         default: {
@@ -97,13 +110,32 @@ const getLocalStream = () =>
     audio: false,
   });
 
-export function* initConnectionHandler_() {
+export function* handleAnswerForNewParticipant({ payload }) {
+  const { userId, offer } = payload;
+  info("Answearing the offer for NP " + userId);
+
+  const answerPeer = new SimplePeer({ trickle: false });
+  answerPeer.signal(offer);
+
+  answerPeer.on("signal", (data) => {
+    info("visszakuldesi adat megérkezett");
+    doSend({
+      event: "answer",
+      data: {
+        userId: userId,
+        answer: data,
+      },
+    });
+  });
+}
+
+export function* createAndSaveNewPeer({ payload }) {
+  info("New Peer: creating " + payload);
+
   const stream = yield getLocalStream();
+  const user = yield select(GetUser);
 
-  yield put(streamReady({ stream }));
-  console.log("Connect to server...");
-
-  p = new SimplePeer({
+  const p = new SimplePeer({
     initiator: true,
     trickle: false,
     stream,
@@ -112,62 +144,13 @@ export function* initConnectionHandler_() {
   p.on("error", (err) => console.log("error", err));
 
   p.on("signal", (data) => {
-    console.log("Signal data was received");
-    fetch("https://192.168.2.109:8081/offer", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+    console.log("Signal Created");
+    doSend({
+      event: "offer",
+      data: {
+        userId: payload,
+        offer: data,
       },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.text())
-      .then((response) => {
-        const { answer, streamId } = JSON.parse(response);
-        console.log(`Connection answer was received with streamId ${streamId}`);
-        p.signal(answer);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
-
-  const channel = new eventChannel((emit) => {
-    p.on("connect", () => {
-      emit(connectedSuccessfully());
-      console.log("Successful connect");
-      //p.send("whatever" + Math.random());
     });
-
-    p.on("data", (data) => {
-      console.log(`Data was received ${data}`);
-    });
-
-    /*socket.onmessage = (evt) => {
-      const rawData = JSON.parse(evt.data);
-      const command = rawData.header;
-
-      switch (command) {
-        case ServerMessages.PLAYERNUM: {
-          info(
-            "Player Number Updated ",
-            rawData.data.playerNum,
-            rawData.data.expectedPlayerNum
-          );
-          emit(updatePlayerNumbers(rawData.data));
-          break;
-        }
-        default: {
-          window.serverMessage(rawData);
-        }
-      }
-    };*/
-
-    return () => {};
   });
-
-  while (true) {
-    const action = yield take(channel);
-    yield put(action);
-  }
 }
