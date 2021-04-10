@@ -26,5 +26,7 @@
   "create": "Create",
   "leave-room-title": "Leave room",
   "leave-room-question": "🤔 Are you sure you want to leave this room?",
-  "leave-room": "Leave room"
+  "leave-room": "Leave room",
+  "start-stream-title": "Set up you devices",
+  "start-stream": "Start stream"
 }

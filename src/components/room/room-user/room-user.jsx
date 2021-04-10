@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { GetUser } from "../../../store/selectors/auth-selectors";
 import { moods } from "../../mood-setting/mood-setting";
-import { initTestConnection } from "../../../store/actions/action-test";
+import { openDialog } from "../../../store/actions/dialog-action";
+import { DialogId } from "../../dialog/dialog";
 
 import styles from "./room-user.module.scss";
 
@@ -33,17 +34,14 @@ const RoomUser = ({ user }) => {
     }
   }, [stream]);
 
-  const testConnection = () => {
-    console.log("Test Start");
-    dispatch(initTestConnection());
-  };
+  const startStreamRequest = () => dispatch(openDialog(DialogId.START_STREAM));
 
   return (
     <div className={styles.Wrapper} key={uid}>
       <div className={styles.User}>
         {stream && <video className={styles.Video} ref={videoRef} autoPlay />}
         {!stream && ownUid === uid && (
-          <div className={styles.Play} onClick={testConnection}>
+          <div className={styles.Play} onClick={startStreamRequest}>
             <i className="far fa-play-circle" />
           </div>
         )}
