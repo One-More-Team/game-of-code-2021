@@ -2,16 +2,15 @@ import { eventChannel } from "redux-saga";
 import { call, put, take, delay, fork, select } from "redux-saga/effects";
 import SimplePeer from "simple-peer";
 import { WSSServerMessages } from "../../enum/wss-messages";
-import {
-  connectedSuccessfully,
-  streamReady,
-} from "../../store/actions/action-test";
+import { storePeer } from "../../store/actions/stream-actions";
 import {
   answerForNewParticipant,
   connectedToWS,
+  finalizeConnection,
   newParticipant,
 } from "../../store/actions/websocket-actions";
 import { GetUser } from "../../store/selectors/auth-selectors";
+import { GetUserStream } from "../../store/selectors/stream-selector";
 import { info } from "../../utils/logger";
 
 const wsUri = "wss://192.168.2.109:8081/";
@@ -87,7 +86,7 @@ function subscribe(socket) {
         }
         case WSSServerMessages.ANSWER: {
           info("ANSWER arriwed");
-          //emit(answerForNewParticipant(rawData.data));
+          emit(finalizeConnection(rawData.data));
           break;
         }
         default: {
@@ -110,12 +109,22 @@ const getLocalStream = () =>
     audio: false,
   });
 
+export function* handlefinalizeConnection({ payload }) {
+  const { userId, answer } = payload;
+  const { id, peer } = yield select(GetUserStream(userId));
+
+  peer.signal(answer);
+
+  info("visszafejtés sikeres  " + id);
+}
 export function* handleAnswerForNewParticipant({ payload }) {
   const { userId, offer } = payload;
   info("Answearing the offer for NP " + userId);
 
   const answerPeer = new SimplePeer({ trickle: false });
   answerPeer.signal(offer);
+
+  yield put(storePeer({ id: userId, peer: answerPeer }));
 
   answerPeer.on("signal", (data) => {
     info("visszakuldesi adat megérkezett");
@@ -129,7 +138,7 @@ export function* handleAnswerForNewParticipant({ payload }) {
   });
 }
 
-export function* createAndSaveNewPeer({ payload }) {
+export function* handleNewParticipant({ payload }) {
   info("New Peer: creating " + payload);
 
   const stream = yield getLocalStream();
@@ -140,6 +149,8 @@ export function* createAndSaveNewPeer({ payload }) {
     trickle: false,
     stream,
   });
+
+  yield put(storePeer({ id: payload, peer: p }));
 
   p.on("error", (err) => console.log("error", err));
 

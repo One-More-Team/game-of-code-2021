@@ -11,6 +11,7 @@ import devicesReducer from "./store/reducers/devices";
 import dialogReducer from "./store/reducers/dialog-reducer";
 import userDataReducer from "./store/reducers/user-data-reducer";
 import roomReducer from "./store/reducers/room-reducer";
+import streamsReducer from "./store/reducers/streams-reducer";
 
 import App from "./App";
 
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   userDataReducer,
   devicesReducer,
   roomReducer,
+  streamsReducer,
 });
 
 const store = createStore(
