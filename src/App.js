@@ -7,7 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 import {
   GetSiteLanguageId,
   GetSiteLanguageMessages,
-  GetStream,
 } from "./store/selectors/app-selector";
 import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
@@ -23,7 +22,6 @@ const App = () => {
   const user = useSelector(GetUser);
   const siteLanguageId = useSelector(GetSiteLanguageId);
   const siteLanguageMessages = useSelector(GetSiteLanguageMessages);
-  const stream = useSelector(GetStream);
 
   const testConnection = () => {
     console.log("Test Start");
