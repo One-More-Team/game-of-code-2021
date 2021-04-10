@@ -3,6 +3,7 @@ const WSSServerMessages = {
   NEWPARTICIPANT: "newParticipant",
   OFFER: "offer",
   ANSWER: "answer",
+  PING: "ping",
 };
 
 export { WSSServerMessages };

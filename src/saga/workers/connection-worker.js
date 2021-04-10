@@ -14,8 +14,8 @@ import { GetRoomId } from "../../store/selectors/room-selectors";
 import { GetUserStream } from "../../store/selectors/stream-selector";
 import { info } from "../../utils/logger";
 
-//const wsUri = "wss://192.168.2.109:8081/";
-const wsUri = "wss://honest-meeting.herokuapp.com/";
+const wsUri = "wss://192.168.2.109:8081/";
+//const wsUri = "wss://honest-meeting.herokuapp.com/";
 
 let websocket;
 
@@ -73,7 +73,6 @@ function subscribe(socket) {
     socket.onmessage = (evt) => {
       const rawData = JSON.parse(evt.data);
       const command = rawData.event;
-      console.log("command " + command);
       switch (command) {
         case WSSServerMessages.NEWPARTICIPANT: {
           info("New Member Arriwed " + rawData.data.userId);
@@ -88,6 +87,13 @@ function subscribe(socket) {
         case WSSServerMessages.ANSWER: {
           info("ANSWER arriwed");
           emit(finalizeConnection(rawData.data));
+          break;
+        }
+        case WSSServerMessages.PING: {
+          info("PING arriwed");
+          doSend({
+            event: "pong",
+          });
           break;
         }
         default: {
