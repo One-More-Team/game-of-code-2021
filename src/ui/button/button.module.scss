@@ -84,7 +84,7 @@
 .TertiaryButton {
   @extend .PrimaryButton;
 
-  background-color: var(--color-0);
+  background-color: var(--color-11);
 
   &:hover {
     filter: contrast(2);
