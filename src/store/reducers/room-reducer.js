@@ -5,6 +5,7 @@ import {
   userAddedToRoom,
   userRemovedFromRoom,
 } from "../actions/room-action";
+import { streamReceived } from "../actions/stream-actions";
 
 const initialState = {
   users: [],
@@ -36,12 +37,22 @@ const roomUserDataChangedHandler = ({ state, payload: user }) => ({
   users: [...state.users.filter((entry) => entry.uid !== user.uid), user],
 });
 
+const streamReceivedHandler = ({ state, payload: { uid, stream } }) => ({
+  ...state,
+  users: [
+    ...state.users.map((entry) =>
+      entry.uid === uid ? { ...entry, stream } : entry
+    ),
+  ],
+});
+
 const configMap = {
   [connectToRoom().type]: connectToRoomHandler,
   [initRoom().type]: initRoomHandler,
   [userAddedToRoom().type]: userAddedToRoomHandler,
   [userRemovedFromRoom().type]: userRemovedFromRoomHandler,
   [roomUserDataChanged().type]: roomUserDataChangedHandler,
+  [streamReceived().type]: streamReceivedHandler,
 };
 
 const roomReducer = (state = initialState, action) => {

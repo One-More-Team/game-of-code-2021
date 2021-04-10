@@ -2,7 +2,7 @@ import { eventChannel } from "redux-saga";
 import { call, put, take, delay, fork, select } from "redux-saga/effects";
 import SimplePeer from "simple-peer";
 import { WSSServerMessages } from "../../enum/wss-messages";
-import { storePeer } from "../../store/actions/stream-actions";
+import { storePeer, streamReceived } from "../../store/actions/stream-actions";
 import {
   answerForNewParticipant,
   connectedToWS,
@@ -121,7 +121,13 @@ export function* handleAnswerForNewParticipant({ payload }) {
   const { userId, offer } = payload;
   info("Answearing the offer for NP " + userId);
 
-  const answerPeer = new SimplePeer({ trickle: false });
+  const stream = yield getLocalStream();
+
+  const answerPeer = new SimplePeer({
+    trickle: false,
+    initiator: false,
+    stream,
+  });
   answerPeer.signal(offer);
 
   yield put(storePeer({ id: userId, peer: answerPeer }));
@@ -138,8 +144,8 @@ export function* handleAnswerForNewParticipant({ payload }) {
   });
 }
 
-export function* handleNewParticipant({ payload }) {
-  info("New Peer: creating " + payload);
+export function* handleNewParticipant({ payload: userId }) {
+  info("New Peer: creating " + userId);
 
   const stream = yield getLocalStream();
   const user = yield select(GetUser);
@@ -150,7 +156,7 @@ export function* handleNewParticipant({ payload }) {
     stream,
   });
 
-  yield put(storePeer({ id: payload, peer: p }));
+  yield put(storePeer({ id: userId, peer: p }));
 
   p.on("error", (err) => console.log("error", err));
 
@@ -159,9 +165,21 @@ export function* handleNewParticipant({ payload }) {
     doSend({
       event: "offer",
       data: {
-        userId: payload,
+        userId,
         offer: data,
       },
     });
   });
+  const streamChannel = new eventChannel((emit) => {
+    p.on("stream", (stream) => {
+      emit(streamReceived({ uid: userId, stream }));
+    });
+
+    return () => {};
+  });
+  while (true) {
+    const action = yield take(streamChannel);
+
+    yield put(action);
+  }
 }

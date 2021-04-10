@@ -5,7 +5,8 @@ import styles from "./room-user.module.scss";
 
 const RoomUser = ({ user }) => {
   const timeout = useRef();
-  const { displayName, uid, mood } = user;
+  const videoref = useRef();
+  const { displayName, uid, mood, stream } = user;
   const [isMoodHighlighted, setIsMoodHighlighted] = useState(false);
 
   useEffect(() => {
@@ -20,9 +21,16 @@ const RoomUser = ({ user }) => {
     };
   }, [mood, setIsMoodHighlighted]);
 
+  useEffect(() => {
+    if (stream) {
+      videoref.current.srcObject = stream;
+    }
+  }, [stream]);
+
   return (
     <div className={styles.Wrapper} key={uid}>
       <div className={styles.User}>
+        {stream && <video className={styles.Video} ref={videoref} autoPlay />}
         <div
           className={`${styles.Mood} ${isMoodHighlighted && styles.Highlight}`}
         >
