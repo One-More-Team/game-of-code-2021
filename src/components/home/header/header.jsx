@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openDialog } from "../../../store/actions/dialog-action";
 
-import { GetUser } from "../../../store/selectors/auth-selectors";
+import { GetProfile, GetUser } from "../../../store/selectors/auth-selectors";
 import { GetUserMood } from "../../../store/selectors/user-data-selector";
 import Info from "../../../ui/info/info";
 import { DialogId } from "../../dialog/dialog";
@@ -13,7 +13,7 @@ import ThemeSelector from "./theme-selector/theme-selector";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { displayName } = useSelector(GetUser);
+  const { displayName } = useSelector(GetProfile);
   const currentMood = useSelector(GetUserMood);
   const openProfileDialog = () => dispatch(openDialog(DialogId.PROFILE));
 

@@ -38,12 +38,14 @@ const JoinOrCreateRoom = ({ className }) => {
           icon="fa-door-open"
           navigationTarget={`/room/${roomId}`}
           style={ButtonStyle.Primary}
+          isEnabled={roomIdValidationResult.isValid}
         />
         <Button
           messageId="create"
           icon="fa-plus-circle"
           navigationTarget={`/room/${roomId}`}
           style={ButtonStyle.Secondary}
+          isEnabled={roomIdValidationResult.isValid}
         />
       </div>
     </Panel>

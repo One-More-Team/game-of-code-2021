@@ -14,6 +14,7 @@ const initialState = {
   activeTheme: Themes.LIGHT,
   languageId: "en",
   stream: null,
+  messages: [],
 };
 
 const getSiteInitedState = ({
@@ -24,7 +25,7 @@ const getSiteInitedState = ({
   (state.isSiteLanguageLoaded || isSiteLanguageLoaded) &&
   (state.isUserDataLoaded || isUserDataLoaded);
 
-const saveSiteTranslationDataHandler = ({ state, payload: { messages } }) => ({
+const saveSiteTranslationDataHandler = ({ state, payload: messages }) => ({
   ...state,
   messages,
   isSiteLanguageLoaded: true,
