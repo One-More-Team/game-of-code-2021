@@ -5,6 +5,7 @@ import { initTestConnection } from "../../store/actions/action-test";
 import Button, { ButtonStyle } from "../../ui/button/button";
 import Header from "./header/header";
 import MyStream from "../my-stream/my-stream";
+import MoodSetting from "../mood-setting/mood-setting";
 
 import styles from "./home.module.scss";
 
@@ -24,6 +25,7 @@ const Home = () => {
         onClick={testConnection}
       />
       <MyStream className={styles.MyStream} />
+      <MoodSetting className={styles.MoodSetting} />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import IndexSaga from "./saga/index";
 import authReducer from "./store/reducers/auth-reducer";
 import appReducer from "./store/reducers/app-reducer";
 import dialogReducer from "./store/reducers/dialog-reducer";
+import userDataReducer from "./store/reducers/user-data-reducer";
 
 import App from "./App";
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   authReducer,
   appReducer,
   dialogReducer,
+  userDataReducer,
 });
 
 const store = createStore(

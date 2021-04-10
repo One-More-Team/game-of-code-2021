@@ -2,8 +2,8 @@ import React from "react";
 
 import styles from "./info.module.scss";
 
-const Info = ({ children, onClick }) => (
-  <div className={styles.Wrapper} onClick={onClick}>
+const Info = ({ children, onClick, className }) => (
+  <div className={`${styles.Wrapper} ${className}`} onClick={onClick}>
     {children}
   </div>
 );

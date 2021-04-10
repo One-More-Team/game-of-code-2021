@@ -19,5 +19,6 @@
   "too-many-requests": "Too many requests, try again later",
   "welcome-message": "👋 Welcome {name}!",
   "cancel": "Cancel",
-  "your-profile": "Your Profile"
+  "your-profile": "Your Profile",
+  "current-mood": "What is you current mood?"
 }

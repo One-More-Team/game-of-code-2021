@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { GetSelectedDialogId } from "../../store/selectors/dialog";
+import { GetSelectedDialogId } from "../../store/selectors/dialog-selector";
 import { closeDialog } from "../../store/actions/dialog-action";
 import { getDialog } from "./dialog-configs";
 import Panel from "../../ui/panel/panel";
