@@ -36,13 +36,13 @@ const JoinOrCreateRoom = ({ className }) => {
         <Button
           messageId="join"
           icon="fa-door-open"
-          navigationTarget="/device-chooser"
+          navigationTarget="/device-setup"
           style={ButtonStyle.Primary}
         />
         <Button
           messageId="create"
           icon="fa-plus-circle"
-          navigationTarget="/device-chooser"
+          navigationTarget="/device-setup"
           style={ButtonStyle.Secondary}
         />
       </div>

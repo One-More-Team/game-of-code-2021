@@ -13,7 +13,7 @@ import { warn } from "../../../utils/logger";
 import Button, { ButtonStyle } from "../../../ui/button/button";
 import Dropdown from "../../../ui/dropdown/dropdown";
 
-import commonStyles from "../device-chooser.module.scss";
+import commonStyles from "../device-selector.module.scss";
 import styles from "./microphone-chooser.module.scss";
 
 let analyser = null;

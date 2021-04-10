@@ -13,7 +13,7 @@ import { warn } from "../../../utils/logger";
 import Button, { ButtonStyle } from "../../../ui/button/button";
 import Dropdown from "../../../ui/dropdown/dropdown";
 
-import styles from "../device-chooser.module.scss";
+import styles from "../device-selector.module.scss";
 
 const CameraChooser = ({
   selectedCamera,
