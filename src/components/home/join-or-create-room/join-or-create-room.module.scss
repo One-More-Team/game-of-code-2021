@@ -1,0 +1,25 @@
+.Wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .InputArea {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+
+    .InputBlock {
+      display: flex;
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+
+  .Actions {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 1em;
+  }
+}

@@ -83,7 +83,7 @@ const SignUp = () => {
               setValidationResult={setDisplayNameValidationResult}
               icon="user"
               placeholder="your-nickname"
-              autoComplete="treasure-hunter-nickname"
+              autoComplete="nickname"
               minLength={3}
               maxLength={20}
             />
@@ -97,7 +97,7 @@ const SignUp = () => {
               icon="at"
               onFocus={clearEmailError}
               placeholder="email"
-              autoComplete="treasure-hunter-email"
+              autoComplete="email"
               minLength={5}
               maxLength={250}
               customValidation={(value) => ({
@@ -144,7 +144,7 @@ const SignUp = () => {
               messageId="sign-up"
               icon="fa-user-plus"
               onClick={onSignUpRequest}
-              style={ButtonStyle.Secondary}
+              style={ButtonStyle.Primary}
               isLoading={isSignUpInProgress}
               autoWidth={false}
               isEnabled={
@@ -157,7 +157,7 @@ const SignUp = () => {
             <Button
               messageId="sign-in"
               icon="fa-sign-in-alt"
-              style={ButtonStyle.Primary}
+              style={ButtonStyle.Secondary}
               navigationTarget="/sign-in"
               autoWidth={false}
             />

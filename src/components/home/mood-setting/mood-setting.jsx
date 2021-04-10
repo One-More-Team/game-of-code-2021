@@ -2,9 +2,9 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setMood } from "../../store/actions/mood-action";
-import { GetUserMood } from "../../store/selectors/user-data-selector";
-import Info from "../../ui/info/info";
+import { setMood } from "../../../store/actions/mood-action";
+import { GetUserMood } from "../../../store/selectors/user-data-selector";
+import Info from "../../../ui/info/info";
 
 import styles from "./mood-setting.module.scss";
 

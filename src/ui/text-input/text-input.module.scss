@@ -13,11 +13,13 @@
     width: 1.5em;
     color: var(--color-5);
     font-size: 1.3em;
+    user-select: none;
+    pointer-events: none;
   }
 
   input {
     color: var(--color-0);
-    width: calc(100% - 60px);
+    width: 100%;
     outline: none;
     border-radius: 5px;
     font-size: 1.2em;
@@ -51,6 +53,8 @@
     opacity: 1;
     width: auto;
     color: var(--color-3);
+    user-select: none;
+    pointer-events: none;
   }
 }
 

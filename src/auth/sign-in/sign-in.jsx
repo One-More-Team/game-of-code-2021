@@ -84,7 +84,7 @@ const SignIn = () => {
               icon="at"
               onFocus={clearEmailError}
               placeholder="email"
-              autoComplete="treasure-hunter-email"
+              autoComplete="email"
               minLength={5}
               maxLength={250}
               customValidation={(value) => ({
@@ -104,7 +104,7 @@ const SignIn = () => {
               onFocus={clearPasswordError}
               type="password"
               placeholder="password"
-              autoComplete="treasure-hunter-password"
+              autoComplete="password"
               minLength={6}
               maxLength={100}
             />
@@ -115,9 +115,8 @@ const SignIn = () => {
             messageId="sign-in"
             icon="fa-sign-in-alt"
             onClick={onSignInRequest}
-            style={ButtonStyle.Secondary}
+            style={ButtonStyle.Primary}
             isLoading={isSignInInProgress}
-            autoWidth={false}
             isEnabled={
               emailValidationResult.isValid && passwordValidationResult.isValid
             }
@@ -125,9 +124,8 @@ const SignIn = () => {
           <Button
             messageId="sign-up"
             icon="fa-user-plus"
-            style={ButtonStyle.Primary}
+            style={ButtonStyle.Secondary}
             navigationTarget="/sign-up"
-            autoWidth={false}
           />
         </div>
       </form>

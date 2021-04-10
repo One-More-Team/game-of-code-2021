@@ -20,5 +20,7 @@
   "welcome-message": "👋 Welcome {name}!",
   "cancel": "Cancel",
   "your-profile": "Your Profile",
-  "current-mood": "What is you current mood?"
+  "current-mood": "What is you current mood?",
+  "join": "Join",
+  "create": "Create"
 }

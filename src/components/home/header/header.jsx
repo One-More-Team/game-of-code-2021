@@ -6,7 +6,7 @@ import { GetUser } from "../../../store/selectors/auth-selectors";
 import { GetUserMood } from "../../../store/selectors/user-data-selector";
 import Info from "../../../ui/info/info";
 import { DialogId } from "../../dialog/dialog";
-import { moods } from "../../mood-setting/mood-setting";
+import { moods } from "../mood-setting/mood-setting";
 
 import styles from "./header.module.scss";
 

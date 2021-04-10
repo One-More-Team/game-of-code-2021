@@ -1,11 +1,10 @@
 import { eventChannel } from "redux-saga";
-import { put, take, takeLatest } from "redux-saga/effects";
+import { put, take } from "redux-saga/effects";
 import SimplePeer from "simple-peer";
 import {
-  initTestConnection,
   connectedSuccessfully,
   streamReady,
-} from "../store/actions/action-test";
+} from "../../store/actions/action-test";
 
 let p;
 
@@ -15,11 +14,11 @@ const getLocalStream = () =>
     audio: false,
   });
 
-function* initConnectionHandler() {
+export function* initConnectionHandler() {
   const stream = yield getLocalStream();
 
   yield put(streamReady({ stream }));
-  console.log("test 2");
+  console.log("Connect to server...");
 
   p = new SimplePeer({
     initiator: true,
@@ -30,7 +29,7 @@ function* initConnectionHandler() {
   p.on("error", (err) => console.log("error", err));
 
   p.on("signal", (data) => {
-    console.log("SIGNAL", JSON.stringify(data));
+    console.log("Signal data was received");
     fetch("https://192.168.2.109:8081/offer", {
       method: "POST",
       headers: {
@@ -41,7 +40,9 @@ function* initConnectionHandler() {
     })
       .then((response) => response.text())
       .then((response) => {
-        p.signal(JSON.parse(response));
+        const { answer, streamId } = JSON.parse(response);
+        console.log(`Connection answer was received with streamId ${streamId}`);
+        p.signal(answer);
       })
       .catch((error) => {
         console.log(error);
@@ -51,12 +52,12 @@ function* initConnectionHandler() {
   const channel = new eventChannel((emit) => {
     p.on("connect", () => {
       emit(connectedSuccessfully());
-      console.log("CONNECT");
+      console.log("Successful connect");
       //p.send("whatever" + Math.random());
     });
 
     p.on("data", (data) => {
-      console.log("data: " + data);
+      console.log(`Data was received ${data}`);
     });
 
     /*socket.onmessage = (evt) => {
@@ -87,7 +88,3 @@ function* initConnectionHandler() {
     yield put(action);
   }
 }
-
-const TestSaga = [takeLatest(initTestConnection().type, initConnectionHandler)];
-
-export default TestSaga;

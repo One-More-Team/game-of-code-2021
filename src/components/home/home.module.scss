@@ -2,11 +2,11 @@
   display: grid;
   grid-template-areas:
     "profile stream"
-    "nothing stream"
+    "room room"
     "button button"
     "mood mood";
   grid-gap: 1em;
-  grid-template-rows: 1fr auto 1fr;
+  grid-template-rows: auto 1fr auto auto;
   padding: 1em;
   height: 100%;
 }
@@ -22,4 +22,11 @@
 .MoodSetting {
   width: 100%;
   grid-area: mood;
+}
+
+.JoinOrCreateRoom {
+  width: fit-content;
+  grid-area: room;
+  align-self: center;
+  justify-self: center;
 }
