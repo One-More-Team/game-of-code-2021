@@ -57,7 +57,7 @@ const App = () => {
                 <Route path="/home" component={Home} />
                 <Route path="/sign-in" render={redirectToHome} />
                 <Route path="/sign-up" render={redirectToHome} />
-                <Route path="/device-chooser" render={DeviceSetup} />
+                <Route path="/device-setup" component={DeviceSetup} />
               </Switch>
             </>
           ) : (
