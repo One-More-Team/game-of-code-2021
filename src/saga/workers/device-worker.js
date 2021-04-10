@@ -1,10 +1,10 @@
-import { call, put, select } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
+
 import {
   setAvailableDevices,
   setCameraError,
   setMicrophoneError,
 } from "../../store/actions/devices";
-import { GetSelectedSpeaker } from "../../store/selectors/devices";
 import { warn } from "../../utils/logger";
 
 export function* initAppHandler() {

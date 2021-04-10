@@ -13,7 +13,6 @@ import SignIn from "./auth/sign-in/sign-in";
 import SignUp from "./auth/sign-up/sign-up";
 import { GetUser } from "./store/selectors/auth-selectors";
 import AppPreloader from "./components/app-preloader/app-preloader";
-import DeviceSetup from "./components/device-chooser/device-setup";
 import Home from "./components/home/home";
 import Dialog from "./components/dialog/dialog";
 import Room from "./components/room/room";
@@ -62,7 +61,6 @@ const App = () => {
                     <Route path="/home" component={Home} />
                     <Route path="/sign-in" render={redirectToHome} />
                     <Route path="/sign-up" render={redirectToHome} />
-                    <Route path="/device-chooser" component={DeviceSetup} />
                     <Route path="/room/:roomId" component={Room} />
                   </Switch>
                 </>

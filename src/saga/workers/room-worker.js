@@ -4,21 +4,39 @@ import firebase from "firebase/app";
 
 import { ROOMS } from "../../enum/database";
 import {
+  initRoom,
   userAddedToRoom,
   userRemovedFromRoom,
 } from "../../store/actions/room-action";
 import { GetUser } from "../../store/selectors/auth-selectors";
+import { GetUserMood } from "../../store/selectors/user-data-selector";
 
 export function* connectToRoomHandler({ payload: roomId }) {
-  const user = select(GetUser);
-  const ownRef = firebase
-    .database()
-    .ref(`${ROOMS}/${roomId}/participants/${user.id}`);
-  ownRef.set({ ...user });
-
+  const roomRef = firebase.database().ref(`${ROOMS}/${roomId}`);
   const participantsRef = firebase
     .database()
     .ref(`${ROOMS}/${roomId}/participants`);
+  let isRoomExist;
+  yield roomRef.once("value").then(function (snap) {
+    isRoomExist = snap.val() != null;
+  });
+  const { displayName, uid } = yield select(GetUser);
+  const mood = yield select(GetUserMood);
+  const user = { displayName, mood, uid };
+
+  if (!isRoomExist) {
+    yield participantsRef.set({
+      [uid]: user,
+    });
+  } else {
+    if (!participantsRef[uid]) {
+      const ownRef = firebase
+        .database()
+        .ref(`${ROOMS}/${roomId}/participants/${uid}`);
+      ownRef.set(user);
+    }
+    yield put(initRoom({ participants: { [uid]: user } }));
+  }
 
   const participantsChannel = eventChannel((emit) => {
     participantsRef.on("child_added", (snap) =>
