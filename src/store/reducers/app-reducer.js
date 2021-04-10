@@ -5,6 +5,7 @@ import {
 } from "../actions/site-language";
 import { Themes } from "../../enum/themes";
 import { setTheme } from "../actions/app-action";
+import { streamReady } from "../actions/action-test";
 
 const initialState = {
   isSiteLanguageLoaded: false,
@@ -12,6 +13,7 @@ const initialState = {
   isSiteinited: false,
   activeTheme: Themes.LIGHT,
   languageId: "en",
+  stream: null,
 };
 
 const getSiteInitedState = ({
@@ -54,11 +56,17 @@ const changeSiteLanguageHandler = ({ state, payload }) => ({
   languageId: payload.languageId,
 });
 
+const streamReadyHandler = ({ state, payload }) => ({
+  ...state,
+  stream: payload.stream,
+});
+
 const configMap = {
   [saveSiteTranslationData().type]: saveSiteTranslationDataHandler,
   [setUser().type]: setUserHandler,
   [setTheme().type]: setThemeHandler,
   [changeSiteLanguage().type]: changeSiteLanguageHandler,
+  [streamReady().type]: streamReadyHandler,
 };
 
 const appReducer = (state = initialState, action) => {
