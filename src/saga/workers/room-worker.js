@@ -90,11 +90,9 @@ export function* connectToRoomHandler({ payload: roomId }) {
       leave: take(leaveRoomHandler),
     });
 
-    if (res.participantsChannel) {
-      yield put(res.participantsChannel);
-    } else if (res.actionsChannel) {
-      yield put(res.actionsChannel);
-    } else return;
+    if (res.participantsChannel) yield put(res.participantsChannel);
+    if (res.actionsChannel) yield put(res.actionsChannel);
+    if (res.leave) return;
   }
 }
 
