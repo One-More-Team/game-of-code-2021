@@ -19,8 +19,8 @@ import { GetRoomId } from "../../store/selectors/room-selectors";
 import { GetUserStream } from "../../store/selectors/stream-selector";
 import { info } from "../../utils/logger";
 
-const wsUri = "wss://192.168.2.109:8081/";
-//const wsUri = "wss://honest-meeting.herokuapp.com/";
+//const wsUri = "wss://192.168.2.109:8081/";
+const wsUri = "wss://honest-meeting.herokuapp.com/";
 
 let websocket;
 
