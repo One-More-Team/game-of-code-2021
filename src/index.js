@@ -15,6 +15,8 @@ import streamsReducer from "./store/reducers/streams-reducer";
 
 import App from "./App";
 
+//import * as faceapi from "./external/face-api.min";
+
 import "./index.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__

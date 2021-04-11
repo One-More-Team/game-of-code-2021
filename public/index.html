@@ -19,6 +19,17 @@
       src="https://kit.fontawesome.com/8bba5946ab.js"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri("%PUBLIC_URL%/js/models"),
+        faceapi.nets.faceLandmark68Net.loadFromUri("%PUBLIC_URL%/models"),
+        faceapi.nets.faceRecognitionNet.loadFromUri("%PUBLIC_URL%/models"),
+        faceapi.nets.faceExpressionNet.loadFromUri("%PUBLIC_URL%/js/models"),
+      ]).then(() => {
+        console.log("data loaded");
+      });
+    </script>
   </head>
   <body>
     <div id="root"></div>
