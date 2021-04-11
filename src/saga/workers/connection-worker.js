@@ -2,9 +2,14 @@ import { eventChannel } from "redux-saga";
 import { call, put, take, delay, fork, select } from "redux-saga/effects";
 import SimplePeer from "simple-peer";
 import { WSSServerMessages } from "../../enum/wss-messages";
-import { storePeer, streamReceived } from "../../store/actions/stream-actions";
+import {
+  clearPeer,
+  storePeer,
+  streamReceived,
+} from "../../store/actions/stream-actions";
 import {
   answerForNewParticipant,
+  clearParticipant,
   connectedToWS,
   finalizeConnection,
   newParticipant,
@@ -14,8 +19,8 @@ import { GetRoomId } from "../../store/selectors/room-selectors";
 import { GetUserStream } from "../../store/selectors/stream-selector";
 import { info } from "../../utils/logger";
 
-//const wsUri = "wss://192.168.2.109:8081/";
-const wsUri = "wss://honest-meeting.herokuapp.com/";
+const wsUri = "wss://192.168.2.109:8081/";
+//const wsUri = "wss://honest-meeting.herokuapp.com/";
 
 let websocket;
 
@@ -96,6 +101,11 @@ function subscribe(socket) {
           });
           break;
         }
+        case WSSServerMessages.LOSTPARTICIPANT: {
+          info("Deleted User");
+          emit(clearParticipant(rawData.data));
+          break;
+        }
         default: {
           // window.serverMessage(rawData);
         }
@@ -106,16 +116,22 @@ function subscribe(socket) {
   });
 }
 
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-// -----------------------------------------------------------------------
-
 const getLocalStream = () =>
   window.navigator.mediaDevices.getUserMedia({
     video: true,
     audio: false,
   });
 
+export function* handleConnectedToWS() {
+  const user = yield select(GetUser);
+  const stream = yield getLocalStream();
+  yield put(streamReceived({ uid: user.uid, stream }));
+}
+export function* handleClearParticipant({ payload }) {
+  const { userId } = payload;
+
+  yield put(clearPeer({ id: userId }));
+}
 export function* handlefinalizeConnection({ payload }) {
   const { userId, answer } = payload;
   const { id, peer } = yield select(GetUserStream(userId));

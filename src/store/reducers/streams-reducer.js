@@ -1,4 +1,4 @@
-import { storePeer } from "../actions/stream-actions";
+import { clearPeer, storePeer } from "../actions/stream-actions";
 
 const initialState = {
   streams: [],
@@ -9,8 +9,14 @@ const storePeerHandler = ({ state, payload }) => ({
   streams: [...state.streams, { id: payload.id, peer: payload.peer }],
 });
 
+const clearPeerHandler = ({ state, payload }) => ({
+  ...state,
+  streams: state.streams.filter((d) => d.id !== payload.id),
+});
+
 const configMap = {
   [storePeer().type]: storePeerHandler,
+  [clearPeer().type]: clearPeerHandler,
 };
 
 const streamsReducer = (state = initialState, action) => {

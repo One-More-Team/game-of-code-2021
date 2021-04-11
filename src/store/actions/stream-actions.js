@@ -7,3 +7,7 @@ export const storePeer = createAction({
 export const streamReceived = createAction({
   type: "STREAM_RECEIVED",
 });
+
+export const clearPeer = createAction({
+  type: "CLEAR_PEER",
+});

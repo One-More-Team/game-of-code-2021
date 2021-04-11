@@ -4,6 +4,7 @@ const WSSServerMessages = {
   OFFER: "offer",
   ANSWER: "answer",
   PING: "ping",
+  LOSTPARTICIPANT: "lostParticipant",
 };
 
 export { WSSServerMessages };

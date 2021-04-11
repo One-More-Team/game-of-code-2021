@@ -15,3 +15,7 @@ export const answerForNewParticipant = createAction({
 export const finalizeConnection = createAction({
   type: "FINALIZE_CONNECTION",
 });
+
+export const clearParticipant = createAction({
+  type: "CLEAR_PARTICIPANT",
+});
