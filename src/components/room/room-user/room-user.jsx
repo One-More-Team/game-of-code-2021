@@ -24,47 +24,47 @@ const RoomUser = ({ user }) => {
       })
   );
 
-  const emotionConfig = {
-    surprised: 100,
-    happy: 75,
-    neutral: 50,
-    sad: 0,
-    angry: 0,
-  };
-
   useEffect(() => {
-    if (ownUid === uid) {
-      setInterval(async () => {
-        if (videoRef.current) {
-          const detections = await window.faceapi
-            .detectAllFaces(
-              videoRef.current,
-              new window.faceapi.TinyFaceDetectorOptions()
-            )
-            .withFaceExpressions();
+    const emotionConfig = {
+      surprised: 100,
+      happy: 75,
+      neutral: 50,
+      sad: 0,
+      angry: 0,
+    };
 
-          if (!detections.length) {
-            return;
-          }
+    //if (ownUid === uid) {
+    setInterval(async () => {
+      if (videoRef.current) {
+        const detections = await window.faceapi
+          .detectAllFaces(
+            videoRef.current,
+            new window.faceapi.TinyFaceDetectorOptions()
+          )
+          .withFaceExpressions();
 
-          const [detection] = detections;
-
-          const sortedExpressions = Object.entries(detection.expressions).sort(
-            ([, value1], [, value2]) => value2 - value1
-          );
-
-          const [[expression]] = sortedExpressions;
-
-          console.log(expression);
-          setChartData((prev) => [
-            ...prev,
-            {
-              uv: emotionConfig[expression],
-            },
-          ]);
+        if (!detections.length) {
+          return;
         }
-      }, 2500);
-    }
+
+        const [detection] = detections;
+
+        const sortedExpressions = Object.entries(detection.expressions).sort(
+          ([, value1], [, value2]) => value2 - value1
+        );
+
+        const [[expression]] = sortedExpressions;
+
+        console.log(expression);
+        setChartData((prev) => [
+          ...prev,
+          {
+            uv: emotionConfig[expression],
+          },
+        ]);
+      }
+    }, 5000);
+    // }
   }, [stream]);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ const RoomUser = ({ user }) => {
         <div className={styles.Info}>{displayName}</div>
         <div className={styles.Ratio} />
       </div>
-      {ownUid === uid && (
+      {
         <div className={styles.Chart}>
           <LineChart
             width={300}
@@ -122,7 +122,7 @@ const RoomUser = ({ user }) => {
             />
           </LineChart>
         </div>
-      )}
+      }
     </div>
   );
 };
