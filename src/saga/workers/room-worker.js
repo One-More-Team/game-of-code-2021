@@ -98,8 +98,7 @@ export function* connectToRoomHandler({ payload: roomId }) {
   }
 }
 
-export function* setMoodHandler({ payload: mood }) {
-  const { uid } = yield select(GetUser);
+export function* setMoodHandler({ payload: { mood, uid } }) {
   const roomId = yield select(GetRoomId);
 
   if (roomId) {

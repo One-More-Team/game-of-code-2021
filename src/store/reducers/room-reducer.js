@@ -1,3 +1,4 @@
+import { setMood } from "../actions/mood-action";
 import {
   actionAddedToRoom,
   actionRemovedFromRoom,
@@ -26,6 +27,13 @@ const connectToRoomHandler = ({ state, payload: roomId }) => ({
 const initRoomHandler = ({ state, payload: { participants } }) => ({
   ...state,
   users: Object.keys(participants).map((key) => participants[key]),
+});
+
+const setMoodHandler = ({ state, payload: { mood, uid } }) => ({
+  ...state,
+  users: state.users.map((user) =>
+    user.uid === uid ? { ...user, mood } : user
+  ),
 });
 
 const userAddedToRoomHandler = ({ state, payload: user }) => ({
@@ -83,6 +91,7 @@ const streamReceivedHandler = ({ state, payload: { uid, stream } }) => ({
 const configMap = {
   [connectToRoom().type]: connectToRoomHandler,
   [initRoom().type]: initRoomHandler,
+  [setMood().type]: setMoodHandler,
   [userAddedToRoom().type]: userAddedToRoomHandler,
   [userRemovedFromRoom().type]: userRemovedFromRoomHandler,
   [roomUserDataChanged().type]: roomUserDataChangedHandler,

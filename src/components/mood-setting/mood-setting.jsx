@@ -3,6 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setMood } from "../../store/actions/mood-action";
+import { GetUser } from "../../store/selectors/auth-selectors";
 import { GetUserMood } from "../../store/selectors/user-data-selector";
 import Info from "../../ui/info/info";
 
@@ -15,8 +16,9 @@ export const moods = "👎,😡,😱,😟,😒,☹️,😕,🙁,😐,🙂,🙃,�
 const MoodSetting = ({ className }) => {
   const dispatch = useDispatch();
   const currentMood = useSelector(GetUserMood);
+  const { uid } = useSelector(GetUser);
 
-  const setMoodRequest = (index) => dispatch(setMood(index));
+  const setMoodRequest = (index) => dispatch(setMood({ mood: index, uid }));
 
   return (
     <Info className={`${className} ${styles.Wrapper}`}>

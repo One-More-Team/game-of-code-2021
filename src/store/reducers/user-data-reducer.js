@@ -4,7 +4,7 @@ const initialState = {
   mood: 9,
 };
 
-const setMoodHandler = ({ state, payload: mood }) => ({
+const setMoodHandler = ({ state, payload: { mood } }) => ({
   ...state,
   mood,
 });
