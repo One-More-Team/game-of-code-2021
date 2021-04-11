@@ -12,6 +12,7 @@ import {
   actionRemovedFromRoom,
   roomActionDataChanged,
   overrideActions,
+  leaveRoom,
 } from "../../store/actions/room-action";
 import { GetUser } from "../../store/selectors/auth-selectors";
 import { GetRoomId, GetActions } from "../../store/selectors/room-selectors";
@@ -87,7 +88,7 @@ export function* connectToRoomHandler({ payload: roomId }) {
     const res = yield race({
       participantsChannel: take(participantsChannel),
       actionsChannel: take(actionsChannel),
-      leave: take(leaveRoomHandler),
+      leave: take(leaveRoom().type),
     });
 
     if (res.participantsChannel) yield put(res.participantsChannel);
