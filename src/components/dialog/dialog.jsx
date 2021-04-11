@@ -12,6 +12,7 @@ export const DialogId = {
   PROFILE: "PROFILE",
   LEAVE_ROOM: "LEAVE_ROOM",
   START_STREAM: "START_STREAM",
+  CREATE_ROOM_ACTION: "CREATE_ROOM_ACTION",
 };
 
 const Dialog = () => {

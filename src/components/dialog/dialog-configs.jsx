@@ -1,6 +1,7 @@
 import React from "react";
 
 import { DialogId } from "./dialog";
+import CreateRoomAction from "./types/create-room-action/create-room-action";
 import LeaveRoom from "./types/leave-room/leave-room";
 import Profile from "./types/profile/profile";
 import StartStream from "./types/start-stream/start-stream";
@@ -26,6 +27,13 @@ export const getDialog = ({ dialogId, close }) => {
         isCloseable: true,
         label: "start-stream-title",
         component: <StartStream close={close} />,
+      };
+
+    case DialogId.CREATE_ROOM_ACTION:
+      return {
+        isCloseable: true,
+        label: "create-room-action",
+        component: <CreateRoomAction close={close} />,
       };
 
     default:

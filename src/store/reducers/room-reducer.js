@@ -1,6 +1,11 @@
 import {
+  actionAddedToRoom,
+  actionRemovedFromRoom,
   connectToRoom,
+  createRoomAction,
   initRoom,
+  overrideActions,
+  roomActionDataChanged,
   roomUserDataChanged,
   userAddedToRoom,
   userRemovedFromRoom,
@@ -9,6 +14,7 @@ import { streamReceived } from "../actions/stream-actions";
 
 const initialState = {
   users: [],
+  actions: [],
   roomId: null,
 };
 
@@ -37,6 +43,34 @@ const roomUserDataChangedHandler = ({ state, payload: user }) => ({
   users: [...state.users.filter((entry) => entry.uid !== user.uid), user],
 });
 
+const actionAddedToRoomHandler = ({ state, payload: action }) => ({
+  ...state,
+  actions: [...state.actions, action],
+});
+
+const actionRemovedFromRoomHandler = ({ state, payload: { timestamp } }) => ({
+  ...state,
+  actions: state.actions.filter((entry) => entry.timestamp !== timestamp),
+});
+
+const roomActionDataChangedHandler = ({ state, payload: action }) => ({
+  ...state,
+  actions: [
+    ...state.actions.filter((entry) => entry.timestamp !== action.timestamp),
+    action,
+  ],
+});
+
+const createRoomActionHandler = ({ state, payload: action }) => ({
+  ...state,
+  actions: [...state.actions, action],
+});
+
+const overrideActionsHandler = ({ state, payload: actions }) => ({
+  ...state,
+  actions,
+});
+
 const streamReceivedHandler = ({ state, payload: { uid, stream } }) => ({
   ...state,
   users: [
@@ -52,6 +86,11 @@ const configMap = {
   [userAddedToRoom().type]: userAddedToRoomHandler,
   [userRemovedFromRoom().type]: userRemovedFromRoomHandler,
   [roomUserDataChanged().type]: roomUserDataChangedHandler,
+  [actionAddedToRoom().type]: actionAddedToRoomHandler,
+  [actionRemovedFromRoom().type]: actionRemovedFromRoomHandler,
+  [roomActionDataChanged().type]: roomActionDataChangedHandler,
+  [createRoomAction().type]: createRoomActionHandler,
+  [overrideActions().type]: overrideActionsHandler,
   [streamReceived().type]: streamReceivedHandler,
 };
 

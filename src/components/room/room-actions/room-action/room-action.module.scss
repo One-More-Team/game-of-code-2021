@@ -1,0 +1,26 @@
+.Wrapper {
+  width: 100%;
+  overflow: hidden;
+  filter: var(--slightly-shadow);
+  background: var(--color-10);
+  padding: 1em;
+  border-radius: 16px;
+  margin: 0.5em 0;
+  color: var(--color-0);
+  text-align: left;
+  line-height: 1.5;
+
+  .Owner {
+    color: var(--color-8);
+    margin-bottom: 0.2em;
+  }
+}
+
+.Positive {
+  background: var(--color-8);
+  color: var(--color-11);
+
+  .Owner {
+    color: var(--color-6);
+  }
+}

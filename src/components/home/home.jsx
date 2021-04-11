@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./header/header";
-import MyStream from "../my-stream/my-stream";
 import MoodSetting from "../mood-setting/mood-setting";
 import JoinOrCreateRoom from "./join-or-create-room/join-or-create-room";
 
@@ -14,7 +13,6 @@ const Home = () => {
         <JoinOrCreateRoom className={styles.JoinOrCreateRoom} />
         <MoodSetting className={styles.MoodSetting} />
       </div>
-      <MyStream className={styles.MyStream} />
     </div>
   );
 };

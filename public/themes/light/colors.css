@@ -18,7 +18,7 @@
   --medium-transparent-cover: #00000099;
   --slightly-transparent-cover: #000000cc;
 
-  --slightly-shadow: drop-shadow(0px 2px 4px var(--color-1));
+  --slightly-shadow: drop-shadow(0px 2px 4px var(--color-11));
   --glow-shadow: drop-shadow(0px 0px 10px var(--color-0));
 
   --main-background-color: #ffff00;

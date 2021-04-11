@@ -8,7 +8,7 @@ import Info from "../../ui/info/info";
 
 import styles from "./mood-setting.module.scss";
 
-export const moods = "👎,😡,😱,😟,😕,🙁,☹️,😒,😐,🙂,🙃,😀,😃,😄,😎,🤣,👍".split(
+export const moods = "👎,😡,😱,😟,😒,☹️,😕,🙁,😐,🙂,🙃,😀,😃,😄,😎,🤣,👍".split(
   ","
 );
 

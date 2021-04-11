@@ -9,6 +9,7 @@ import Button, { ButtonStyle } from "../../ui/button/button";
 import { DialogId } from "../dialog/dialog";
 import MoodSetting from "../mood-setting/mood-setting";
 import ThemeSelector from "../theme-selector/theme-selector";
+import RoomActions from "./room-actions/room-actions";
 import RoomUser from "./room-user/room-user";
 
 import styles from "./room.module.scss";
@@ -38,6 +39,7 @@ const Room = () => {
         {roomId}
       </div>
       <ThemeSelector className={styles.ThemeSelector} />
+      <RoomActions className={styles.Content} />
       <div className={styles.Users}>
         {users && users.map((user) => <RoomUser key={user.uid} user={user} />)}
       </div>

@@ -1,0 +1,22 @@
+.InputArea {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 0.5em;
+
+  .InputBlock {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+
+.Options {
+  display: grid;
+  margin: 1em 0 2em;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}

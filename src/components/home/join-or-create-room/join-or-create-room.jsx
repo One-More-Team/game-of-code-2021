@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
 import Button, { ButtonStyle } from "../../../ui/button/button";
 import Panel from "../../../ui/panel/panel";
 import TextInput from "../../../ui/text-input/text-input";
@@ -7,14 +6,10 @@ import TextInput from "../../../ui/text-input/text-input";
 import styles from "./join-or-create-room.module.scss";
 
 const JoinOrCreateRoom = ({ className }) => {
-  // const dispatch = useDispatch();
   const [roomId, setRoomId] = useState("");
   const [roomIdValidationResult, setRoomIdValidationResult] = useState({
     isValid: false,
   });
-
-  // const joinRoomRequest = () => dispatch("");
-  // const creatRoomRequest = () => dispatch("");
 
   return (
     <Panel className={`${styles.Wrapper} ${className}`}>
